@@ -6,7 +6,7 @@ namespace PoLaKoSz.BejewelledBlitz
     {
         static void Main(string[] args)
         {
-            new PalyaViewModel(new JatekosViewModel().Jatekos).UpdateUI();
+            new PalyaViewModel(new JatekosViewModel().Jatekos)/*.UpdateUI()*/;
 
             Console.Read();
         }

@@ -42,12 +42,12 @@ namespace PoLaKoSz.BejewelledBlitz
 
 
 
-        public Palya(int sorokSzama, int oszlopokSzama, int maxGolyok)
+        public Palya(int sorokSzama, int oszlopokSzama)
         {
             Jatekter = new Golyo[sorokSzama, oszlopokSzama];
 
             MinEgyszinuGolyokSzama = 2;
-            MaxEgyszinuGolyokSzama = maxGolyok;
+            MaxEgyszinuGolyokSzama = 5;
         }
 
         public Palya(Golyo[,] palya, int maxGolyok)
