@@ -29,5 +29,10 @@ namespace PoLaKoSz.BejewelledBlitz
 
             return -1;
         }
+
+        public static void ConsoleAblakNev(string nev)
+        {
+            Console.Title = nev;
+        }
     }
 }

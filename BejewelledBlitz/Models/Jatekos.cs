@@ -6,6 +6,9 @@ namespace PoLaKoSz.BejewelledBlitz
     {
         public string Nev { get; private set; }
 
+        /// <summary>
+        /// Játékos játékideje ezredmásodpercben
+        /// </summary>
         public int Jatekido { get; private set; }
 
         public int SorokSzama { get; private set; }
@@ -16,10 +19,10 @@ namespace PoLaKoSz.BejewelledBlitz
 
 
 
-        public Jatekos(string nev, int jatekIdo, int sorokSzama, int oszlopokSzama)
+        public Jatekos(string nev, int jatekMiliMP, int sorokSzama, int oszlopokSzama)
         {
             Nev = nev;
-            Jatekido = jatekIdo;
+            Jatekido = jatekMiliMP;
             SorokSzama = sorokSzama;
             OszlopokSzama = oszlopokSzama;
         }

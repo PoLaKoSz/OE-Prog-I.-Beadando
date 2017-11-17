@@ -11,7 +11,7 @@ namespace PoLaKoSz.BejewelledBlitz
         public JatekosViewModel()
         {
 #if DEBUG
-            string jatekosNeve = "TestElek";
+            string jatekosNeve = "TesztElek";
             int jatekido = 2;
             int sorokSzama = 5;
             int oszlopokSzama = 10;
@@ -22,7 +22,7 @@ namespace PoLaKoSz.BejewelledBlitz
             int oszlopokSzama = IntInputBeker("Adja meg, hogy hány oszlopból álljon a pálya: ");
 #endif
 
-            Jatekos = new Jatekos(jatekosNeve, jatekido * 60, sorokSzama, oszlopokSzama);
+            Jatekos = new Jatekos(jatekosNeve, jatekido * 60 * 1000, sorokSzama, oszlopokSzama);
 
             ConsoleTorlese();
         }

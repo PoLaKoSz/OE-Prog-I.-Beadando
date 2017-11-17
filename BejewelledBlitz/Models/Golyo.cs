@@ -40,11 +40,6 @@ namespace PoLaKoSz.BejewelledBlitz
             return new Golyo(sorIndex, oszlopIndex, randomGolyoSzin);
         }
 
-        public static Golyo Klon(Golyo golyo)
-        {
-            return new Golyo(golyo.SorIndex, golyo.OszlopIndex, golyo.Szine);
-        }
-
         public override bool Equals(object obj)
         {
             if (obj == null ||
