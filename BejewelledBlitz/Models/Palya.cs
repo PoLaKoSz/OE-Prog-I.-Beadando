@@ -38,7 +38,7 @@ namespace PoLaKoSz.BejewelledBlitz
             }
         }
         
-        public Golyo[,] Jatekter { get; private set; }
+        public Golyo[,] Jatekter { get; set; }
 
 
 

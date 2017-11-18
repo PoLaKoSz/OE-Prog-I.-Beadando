@@ -12,7 +12,7 @@ namespace PoLaKoSz.BejewelledBlitz
         {
 #if DEBUG
             string jatekosNeve = "TesztElek";
-            int jatekido = 2;
+            int jatekido = 50;
             int sorokSzama = 5;
             int oszlopokSzama = 10;
 #else

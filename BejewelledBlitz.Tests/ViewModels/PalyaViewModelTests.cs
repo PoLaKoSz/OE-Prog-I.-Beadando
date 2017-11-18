@@ -10,6 +10,29 @@ namespace PoLaKoSz.BejewelledBlitzTests
         PalyaViewModel pvm = new PalyaViewModel(new Jatekos("TesztElek", 2, 2, 4));
 
         [TestMethod]
+        public void KetGolyoCserejePalyan()
+        {
+            Golyo[,] palya = new Golyo[,]
+            {
+                {
+                    new Golyo(0, 0, ConsoleColor.Yellow),
+                    new Golyo(0, 1, ConsoleColor.Red),
+                }
+            };
+            Golyo[,] expected = new Golyo[,]
+            {
+                {
+                    new Golyo(0, 0, ConsoleColor.Red),
+                    new Golyo(0, 1, ConsoleColor.Yellow),
+                }
+            };
+
+            pvm.KetGolyoCserejePalyan(palya, palya[0, 0], palya[0, 1]);
+
+            CollectionAssert.AreEqual(expected, palya);
+        }
+
+        [TestMethod]
         public void EgymasMellettE_Igen()
         {
             var golyo1 = new Golyo(0, 0, ConsoleColor.Red);

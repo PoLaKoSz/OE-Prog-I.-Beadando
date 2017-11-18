@@ -54,10 +54,26 @@ namespace PoLaKoSz.BejewelledBlitz
 
             if (egymasMellett || egymasFelett)
             {
-                int legalsoModositottSorindex = AzonosSzinuGolyokEltuntetese(Palya, Jatekos, 0);
+                int legalsoModositottSorindex = (golyo1.SorIndex > golyo2.SorIndex) ? golyo1.SorIndex: golyo2.SorIndex;
 
-                UresHelyekreGolyokLehozasa(Palya.Jatekter, legalsoModositottSorindex);
+                KetGolyoCserejePalyan(Palya.Jatekter, golyo1, golyo2);
+                
+                do
+                {
+                    legalsoModositottSorindex = AzonosSzinuGolyokEltuntetese(Palya, Jatekos, legalsoModositottSorindex);
+
+                    UresHelyekreGolyokLehozasa(Palya.Jatekter, legalsoModositottSorindex);
+
+                    legalsoModositottSorindex--;
+                } while (legalsoModositottSorindex >= 0);
             }            
+        }
+
+        public void KetGolyoCserejePalyan(Golyo[,] palya, Golyo golyo1, Golyo golyo2)
+        {
+            ConsoleColor golyo1Szine = golyo1.Szine;
+            palya[golyo1.SorIndex, golyo1.OszlopIndex] = new Golyo(golyo1.SorIndex, golyo1.OszlopIndex, golyo2.Szine);
+            palya[golyo2.SorIndex, golyo2.OszlopIndex] = new Golyo(golyo2.SorIndex, golyo2.OszlopIndex, golyo1Szine);
         }
 
         public bool EgymasMellettE(Golyo golyo1, Golyo golyo2)
