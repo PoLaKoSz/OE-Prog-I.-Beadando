@@ -85,7 +85,7 @@ namespace PoLaKoSz.BejewelledBlitz
             Golyo[,] palya = palyaBeallitasok.Jatekter;
 
             int             oszlopokSzama = palya.GetLength(1),
-                legalsoModositottSorIndex = -1;
+                legalsoModositottSorIndex = 0;
 
             for (int x = sorIndex; x >= 0; x--)
             {
@@ -98,9 +98,14 @@ namespace PoLaKoSz.BejewelledBlitz
                         jatekos.Pontszam += azonosSzinuGolyok;
 
                         PontokatEroGolyokEltuntetese(palya, x, y, azonosSzinuGolyok);
+
+                        if (legalsoModositottSorIndex == 0)
+                        {
+                            legalsoModositottSorIndex = x;
+                        }
                     }
 
-                    y -= azonosSzinuGolyok;
+                    y -= azonosSzinuGolyok - 1;
                 }
             }
 

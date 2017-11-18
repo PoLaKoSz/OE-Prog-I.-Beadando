@@ -135,32 +135,95 @@ namespace PoLaKoSz.BejewelledBlitzTests
             {
                 {
                     new Golyo(0, 0, ConsoleColor.Yellow),
+                    new Golyo(0, 1, ConsoleColor.Red),
+                    new Golyo(0, 2, ConsoleColor.Green),
+                    new Golyo(0, 3, ConsoleColor.Black),
+                    new Golyo(0, 4, ConsoleColor.Red),
+                },
+                {
+                    new Golyo(1, 0, ConsoleColor.Red),
+                    new Golyo(1, 1, ConsoleColor.Cyan),
+                    new Golyo(1, 2, ConsoleColor.Red),
+                    new Golyo(1, 3, ConsoleColor.DarkGray),
+                    new Golyo(1, 4, ConsoleColor.Red),
+                },
+                {
+                    new Golyo(2, 0, ConsoleColor.Red),
                     null,
                     null,
+                    null,
+                    null,
+                },
+            };
+
+            int modositottSorindex = pvm.AzonosSzinuGolyokEltuntetese(palyaBeallitasok, jatekos, 2);
+
+            Assert.AreEqual(4, jatekos.Pontszam);
+            Assert.AreEqual(2, modositottSorindex);
+            CollectionAssert.AreEqual(expected, palya);
+        }
+
+        [TestMethod]
+        public void AzonosSzinuGolyokEltuntetese_TobbSorbanIsPontok()
+        {
+            int maxGolyok = 5;
+            var jatekos = new Jatekos("asdasd", 2000, 3, 3);
+
+            Golyo[,] palya = new Golyo[,]
+            {
+                {
+                    new Golyo(0, 0, ConsoleColor.Yellow),
+                    new Golyo(0, 1, ConsoleColor.Red),
+                    new Golyo(0, 2, ConsoleColor.Green),
+                    new Golyo(0, 3, ConsoleColor.Red),
+                    new Golyo(0, 4, ConsoleColor.Red),
+                },
+                {
+                    new Golyo(1, 0, ConsoleColor.Red),
+                    new Golyo(1, 1, ConsoleColor.DarkGray),
+                    new Golyo(1, 2, ConsoleColor.White),
+                    new Golyo(1, 3, ConsoleColor.White),
+                    new Golyo(1, 4, ConsoleColor.Red),
+                },
+                {
+                    new Golyo(2, 0, ConsoleColor.Red),
+                    new Golyo(2, 1, ConsoleColor.Green),
+                    new Golyo(2, 2, ConsoleColor.Green),
+                    new Golyo(2, 3, ConsoleColor.Green),
+                    new Golyo(2, 4, ConsoleColor.Red),
+                },
+            };
+            var palyaBeallitasok = new Palya(palya, maxGolyok);
+            var expected = new Golyo[,]
+            {
+                {
+                    new Golyo(0, 0, ConsoleColor.Yellow),
+                    new Golyo(0, 1, ConsoleColor.Red),
+                    new Golyo(0, 2, ConsoleColor.Green),
                     null,
                     null,
                 },
                 {
                     new Golyo(1, 0, ConsoleColor.Red),
-                    new Golyo(1, 1, ConsoleColor.Red),
-                    new Golyo(1, 2, ConsoleColor.Green),
-                    new Golyo(1, 3, ConsoleColor.Black),
+                    new Golyo(1, 1, ConsoleColor.DarkGray),
+                    null,
+                    null,
                     new Golyo(1, 4, ConsoleColor.Red),
                 },
                 {
                     new Golyo(2, 0, ConsoleColor.Red),
-                    new Golyo(2, 1, ConsoleColor.Cyan),
-                    new Golyo(2, 2, ConsoleColor.Red),
-                    new Golyo(2, 3, ConsoleColor.DarkGray),
+                    null,
+                    null,
+                    null,
                     new Golyo(2, 4, ConsoleColor.Red),
                 },
             };
 
-            pvm.AzonosSzinuGolyokEltuntetese(palyaBeallitasok, jatekos, 2);
+            int modositottSorindex = pvm.AzonosSzinuGolyokEltuntetese(palyaBeallitasok, jatekos, 2);
 
+            Assert.AreEqual(7, jatekos.Pontszam);
+            Assert.AreEqual(2, modositottSorindex);
             CollectionAssert.AreEqual(expected, palya);
-            Assert.AreEqual(4, jatekos.Pontszam);
-
         }
 
         [TestMethod]
