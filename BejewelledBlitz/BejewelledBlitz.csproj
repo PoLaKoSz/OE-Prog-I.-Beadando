@@ -53,6 +53,7 @@
     <Compile Include="ViewModels\JatekosViewModel.cs" />
     <Compile Include="ViewModels\PalyaViewModel.cs" />
     <Compile Include="ViewModels\RanglistaViewModel.cs" />
+    <Compile Include="Views\JatekosView.cs" />
     <Compile Include="Views\PalyaView.cs" />
     <Compile Include="Views\RanglistaView.cs" />
     <Compile Include="Views\UI.cs" />
