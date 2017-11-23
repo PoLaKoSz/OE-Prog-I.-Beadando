@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="ViewModels\PalyaViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\RanglistaViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
