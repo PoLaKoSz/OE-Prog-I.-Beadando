@@ -19,7 +19,7 @@ namespace PoLaKoSz.BejewelledBlitz
             Palya = new Palya(Jatekos.SorokSzama, Jatekos.OszlopokSzama);
             PalyaFeltolteseSzinesGolyokkal(Palya.Jatekter);
 
-            PalyaView = new PalyaView(Palya);
+            PalyaView = new PalyaView(Palya.Jatekter);
         }
 
 

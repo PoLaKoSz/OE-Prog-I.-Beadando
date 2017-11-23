@@ -4,21 +4,21 @@ namespace PoLaKoSz.BejewelledBlitz
 {
     public class PalyaView : UI
     {
-        Palya Jatekter;
+        Golyo[,] Palya;
 
 
 
-        public PalyaView(Palya jatekter)
+        public PalyaView(Golyo[,] palya)
         {
-            Jatekter = jatekter;
+            Palya = palya;
         }
 
 
 
         public Golyo[] GolyokKoordinatainakBekerese()
         {
-            Golyo golyo1 = Jatekter.Jatekter[SorszamBeker(1), OszlopszamBeker(1)];
-            Golyo golyo2 = Jatekter.Jatekter[SorszamBeker(2), OszlopszamBeker(2)];
+            Golyo golyo1 = Palya[SorszamBeker(1), OszlopszamBeker(1)];
+            Golyo golyo2 = Palya[SorszamBeker(2), OszlopszamBeker(2)];
 
             return new Golyo[]
             {
@@ -26,41 +26,40 @@ namespace PoLaKoSz.BejewelledBlitz
             };
         }
 
-        private int SorszamBeker(int golyoSorszama)
+        int SorszamBeker(int golyoSorszama)
         {
             int valasz;
 
             do
             {
                 valasz = IntInputBeker("Kérlek add meg a(z) " + golyoSorszama + ". golyó sorának számát: ") - 1;
-            } while (0 > valasz || valasz >= Jatekter.Jatekter.GetLength(0)); // Hogyha grafikus lenne a játék, akkor szerintem nem is kéne ellenőrizni ezt (View-ban nem ajánlott validálni)
+            } while (0 > valasz || valasz >= Palya.GetLength(0)); // Hogyha grafikus lenne a játék, akkor szerintem nem is kéne ellenőrizni ezt (View-ban nem ajánlott validálni)
 
             return valasz;
         }
 
-        private int OszlopszamBeker(int golyoSorszama)
+        int OszlopszamBeker(int golyoSorszama)
         {
             int valasz;
 
             do
             {
                 valasz = IntInputBeker("Kérlek add meg a(z) " + golyoSorszama + ". golyó oszlopának számát: ") - 1;
-            } while (0 > valasz || valasz >= Jatekter.Jatekter.GetLength(1)); // Hogyha grafikus lenne a játék, akkor szerintem nem is kéne ellenőrizni ezt (View-ban nem ajánlott validálni)
+            } while (0 > valasz || valasz >= Palya.GetLength(1)); // Hogyha grafikus lenne a játék, akkor szerintem nem is kéne ellenőrizni ezt (View-ban nem ajánlott validálni)
 
             return valasz;
         }
 
         public void RefreshUI()
         {
-            // https://stackoverflow.com/a/2743263/7306734
-            Golyo[,] matrix = Jatekter.Jatekter;
-
-            int sorokSzama = matrix.GetLength(0);
-            int oszlopokSzama = matrix.GetLength(1);
+            int sorokSzama = Palya.GetLength(0);
+            int oszlopokSzama = Palya.GetLength(1);
 
             FejlecHozzadasa(sorokSzama, oszlopokSzama);
 
-            SorszamozottTartalom(matrix, sorokSzama, oszlopokSzama);            
+            SorszamozottTartalom(Palya, sorokSzama, oszlopokSzama);
+
+            //ConsoleTorlese();//Ezt ide lehetne rakni, de szerintem jobb, ha látszódik a korábbi pálya állása is
         }
 
         void FejlecHozzadasa(int sorokSzama, int oszlopokSzama)
@@ -83,6 +82,7 @@ namespace PoLaKoSz.BejewelledBlitz
 
                 for (int j = 0; j < oszlopokSzama; j++)
                 {
+                    // https://stackoverflow.com/a/2743263/7306734
                     Console.ForegroundColor = matrix[i, j].Szine;
 
                     Console.Write(" {0, 2}", 0);

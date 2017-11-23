@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccessLayer\TxtFajlmuveletek.cs" />
     <Compile Include="Models\Golyo.cs" />
     <Compile Include="Models\Jatekos.cs" />
     <Compile Include="Models\Koordinata.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="ViewModels\PalyaViewModel.cs" />
     <Compile Include="ViewModels\RanglistaViewModel.cs" />
     <Compile Include="Views\PalyaView.cs" />
+    <Compile Include="Views\RanglistaView.cs" />
     <Compile Include="Views\UI.cs" />
   </ItemGroup>
   <ItemGroup>
