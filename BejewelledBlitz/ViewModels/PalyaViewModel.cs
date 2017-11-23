@@ -4,11 +4,9 @@ namespace PoLaKoSz.BejewelledBlitz
 {
     public class PalyaViewModel
     {
-        Palya Palya;
-
+        protected Jatekos Jatekos;
+        protected Palya Palya;
         PalyaView PalyaView;
-
-        Jatekos Jatekos;
 
 
 
@@ -50,7 +48,7 @@ namespace PoLaKoSz.BejewelledBlitz
         protected void Lepes(Golyo golyo1, Golyo golyo2)
         {
             var egymasMellett = EgymasMellettE(golyo1, golyo2);
-            var egymasFelett = EgymasFelettE(golyo1, golyo2);
+            var  egymasFelett = EgymasFelettE(golyo1, golyo2);
 
             if (egymasMellett || egymasFelett)
             {
@@ -69,20 +67,20 @@ namespace PoLaKoSz.BejewelledBlitz
             }            
         }
 
-        public void KetGolyoCserejePalyan(Golyo[,] palya, Golyo golyo1, Golyo golyo2)
+        void KetGolyoCserejePalyan(Golyo[,] palya, Golyo golyo1, Golyo golyo2)
         {
             ConsoleColor golyo1Szine = golyo1.Szine;
             palya[golyo1.SorIndex, golyo1.OszlopIndex] = new Golyo(golyo1.SorIndex, golyo1.OszlopIndex, golyo2.Szine);
             palya[golyo2.SorIndex, golyo2.OszlopIndex] = new Golyo(golyo2.SorIndex, golyo2.OszlopIndex, golyo1Szine);
         }
 
-        public bool EgymasMellettE(Golyo golyo1, Golyo golyo2)
+        bool EgymasMellettE(Golyo golyo1, Golyo golyo2)
         {
             return golyo1.SorIndex == golyo2.SorIndex &&
                    Math.Abs(golyo1.OszlopIndex - golyo2.OszlopIndex) == 1;
         }
 
-        public bool EgymasFelettE(Golyo golyo1, Golyo golyo2)
+        bool EgymasFelettE(Golyo golyo1, Golyo golyo2)
         {
             return golyo1.OszlopIndex == golyo2.OszlopIndex &&
                    Math.Abs(golyo1.SorIndex - golyo2.SorIndex) == 1;
@@ -96,7 +94,7 @@ namespace PoLaKoSz.BejewelledBlitz
         /// <param name="jatekos"></param>
         /// <param name="sorIndex"></param>
         /// <returns></returns>
-        public int AzonosSzinuGolyokEltuntetese(Palya palyaBeallitasok, Jatekos jatekos, int sorIndex)
+        int AzonosSzinuGolyokEltuntetese(Palya palyaBeallitasok, Jatekos jatekos, int sorIndex)
         {
             Golyo[,] palya = palyaBeallitasok.Jatekter;
 
@@ -135,7 +133,7 @@ namespace PoLaKoSz.BejewelledBlitz
         /// <param name="sorIndex"></param>
         /// <param name="oszlopIndex"></param>
         /// <returns></returns>
-        public int MegszamlalasTetel(Golyo[,] palya, int sorIndex, int oszlopIndex)
+        int MegszamlalasTetel(Golyo[,] palya, int sorIndex, int oszlopIndex)
         {
             int       oszlopokSzama = palya.GetLength(1);
             int egyszinuGolyokSzama = 1;
@@ -162,7 +160,7 @@ namespace PoLaKoSz.BejewelledBlitz
         /// <param name="x"></param>
         /// <param name="oszlopIndex"></param>
         /// <param name="darabszam"></param>
-        public void PontokatEroGolyokEltuntetese(Golyo[,] palya, int x, int oszlopIndex, int darabszam)
+        void PontokatEroGolyokEltuntetese(Golyo[,] palya, int x, int oszlopIndex, int darabszam)
         {
             for (int y = oszlopIndex; y > oszlopIndex - darabszam; y--)
             {
@@ -176,7 +174,7 @@ namespace PoLaKoSz.BejewelledBlitz
         /// </summary>
         /// <param name="palya"></param>
         /// <param name="sorIndex"></param>
-        public void UresHelyekreGolyokLehozasa(Golyo[,] palya, int sorIndex)
+        void UresHelyekreGolyokLehozasa(Golyo[,] palya, int sorIndex)
         {
             int oszlopokSzama = palya.GetLength(1);
 
@@ -194,7 +192,7 @@ namespace PoLaKoSz.BejewelledBlitz
         /// <param name="palya"></param>
         /// <param name="sorIndextolFelfele"></param>
         /// <param name="y"></param>
-        public void FuggolegesSzetvalogatasHelybenCserevel(Golyo[,] palya, int sorIndextolFelfele, int y)
+        void FuggolegesSzetvalogatasHelybenCserevel(Golyo[,] palya, int sorIndextolFelfele, int y)
         {
             int belsoSorindex = int.MaxValue;
 
@@ -227,7 +225,7 @@ namespace PoLaKoSz.BejewelledBlitz
         /// <param name="palya"></param>
         /// <param name="sorIndex"></param>
         /// <param name="y"></param>
-        public void OszlopUresHelyeireRandomGolyok(Golyo[,] palya, int sorIndex, int y)
+        void OszlopUresHelyeireRandomGolyok(Golyo[,] palya, int sorIndex, int y)
         {
             int oszlopokSzama = palya.GetLength(1);
 

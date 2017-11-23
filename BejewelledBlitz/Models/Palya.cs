@@ -4,11 +4,11 @@ namespace PoLaKoSz.BejewelledBlitz
 {
     public class Palya
     {
-        private int minEgyszinuGolyokSzama;
+        int minEgyszinuGolyokSzama;
         public int MinEgyszinuGolyokSzama
         {
             get { return minEgyszinuGolyokSzama; }
-            set
+            private set
             {
                 if (value > 1)
                 {
@@ -21,11 +21,11 @@ namespace PoLaKoSz.BejewelledBlitz
             }
         }
 
-        private int maxEgyszinuGolyokSzama;
+        int maxEgyszinuGolyokSzama;
         public int MaxEgyszinuGolyokSzama
         {
             get { return maxEgyszinuGolyokSzama; }
-            set
+            private set
             {
                 if (value > MinEgyszinuGolyokSzama)
                 {
@@ -48,14 +48,6 @@ namespace PoLaKoSz.BejewelledBlitz
 
             MinEgyszinuGolyokSzama = 2;
             MaxEgyszinuGolyokSzama = 5;
-        }
-
-        public Palya(Golyo[,] palya, int maxGolyok)
-        {
-            Jatekter = palya;
-
-            MinEgyszinuGolyokSzama = 2;
-            MaxEgyszinuGolyokSzama = maxGolyok;
         }
     }
 }

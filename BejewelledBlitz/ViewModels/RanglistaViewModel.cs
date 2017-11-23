@@ -10,7 +10,7 @@ namespace PoLaKoSz.BejewelledBlitz
          * először adjam a Ranglista tömböt, mert az UjJatekeredmenyHozzaadasa() metódusban ahhoz, hogy új elemet tudjak hozzáadni a
          * tömbhöz egy új tömböt kell létrehozzak, így a konstruktorban a RanglistaView-nek átadott tömb elvesztette volna a referenciáját.
         */
-        List<Jatekos> Ranglista;
+        protected List<Jatekos> ranglista;
         RanglistaView View;
 
 
@@ -21,7 +21,7 @@ namespace PoLaKoSz.BejewelledBlitz
 
             KorabbiRanglistaBetolteseFajlbol();
 
-            View = new RanglistaView(Ranglista);
+            View = new RanglistaView(ranglista);
         }
         
 
@@ -32,15 +32,15 @@ namespace PoLaKoSz.BejewelledBlitz
 
             if (sorok.Length == 0)
             {
-                Ranglista = new List<Jatekos>();
+                ranglista = new List<Jatekos>();
             }
             else
             {
-                Ranglista = new List<Jatekos>();
+                ranglista = new List<Jatekos>();
 
                 foreach (string sor in sorok)
                 {
-                    Ranglista.Add(Jatekos.Parse(sor));
+                    ranglista.Add(Jatekos.Parse(sor));
                 }                
             }
         }
@@ -51,9 +51,9 @@ namespace PoLaKoSz.BejewelledBlitz
         /// <param name="jatekos"></param>
         public void UjJatekeredmenyHozzaadasa(Jatekos jatekos)
         {
-            Ranglista.Add(jatekos);
+            ranglista.Add(jatekos);
 
-            JavitottBeillesztesesRendezes(Ranglista);
+            JavitottBeillesztesesRendezes(ranglista);
 
             RanglistaMenteseFajlba();
         }
@@ -63,7 +63,7 @@ namespace PoLaKoSz.BejewelledBlitz
         /// Lista első helyére kerül a leghosszabb ideig játszó, legtöbb pontot elért játékos
         /// </summary>
         /// <param name="x"></param>
-        public void JavitottBeillesztesesRendezes(List<Jatekos> x)
+        void JavitottBeillesztesesRendezes(List<Jatekos> x)
         {
             for (int i = 1; i < x.Count; i++)
             {
@@ -84,11 +84,11 @@ namespace PoLaKoSz.BejewelledBlitz
 
         void RanglistaMenteseFajlba()
         {
-            string[] sorok = new string[Ranglista.Count];
+            string[] sorok = new string[ranglista.Count];
 
-            for (int i = 0; i < Ranglista.Count; i++)
+            for (int i = 0; i < ranglista.Count; i++)
             {
-                sorok[i] = Ranglista[i].ToString();
+                sorok[i] = ranglista[i].ToString();
             }
 
             txtFajlmuveletek.StringTombMentese(sorok);

@@ -4,101 +4,117 @@ using System.Collections.Generic;
 
 namespace PoLaKoSz.BejewelledBlitzTests
 {
+    public class RanglistaViewModelMock : RanglistaViewModel
+    {
+        public List<Jatekos> Ranglista
+        {
+            get { return base.ranglista; }
+            set { base.ranglista = value; }
+        }
+
+
+        
+        public RanglistaViewModelMock(List<Jatekos> ranglista)
+        {
+            Ranglista = ranglista;
+        }
+    }
+
     [TestClass]
     public class RanglistaViewModelTests
     {
-        RanglistaViewModel ranglistaViewModel = new RanglistaViewModel();
+        RanglistaViewModelMock ranglistaViewModel;
 
         [TestMethod]
-        public void JavitottBeillesztesesRendezes__IdoSzerintVannakForditva()
+        public void RanglistaViewModel__JavitottBeillesztesesRendezes__IdoSzerintVannakForditva()
         {
-            List<Jatekos> jatekosok = new List<Jatekos>()
-            {
-                new Jatekos("PoLáKoSz", 10000, 20),
-                new Jatekos("PoLáKoSz", 20000, 20),
-                new Jatekos("PoLáKoSz", 30000, 20),
-            };
-
-            ranglistaViewModel.JavitottBeillesztesesRendezes(jatekosok);
-
-
             List<Jatekos> expected = new List<Jatekos>()
             {
+                new Jatekos("PoLáKoSz", 40000, 20),
                 new Jatekos("PoLáKoSz", 30000, 20),
                 new Jatekos("PoLáKoSz", 20000, 20),
                 new Jatekos("PoLáKoSz", 10000, 20),
             };
+            List<Jatekos> actual = new List<Jatekos>()
+            {
+                new Jatekos("PoLáKoSz", 10000, 20),
+                new Jatekos("PoLáKoSz", 20000, 20),
+                new Jatekos("PoLáKoSz", 30000, 20),
+            };
+            ranglistaViewModel = new RanglistaViewModelMock(actual);
 
-            CollectionAssert.AreEqual(expected, jatekosok);
+            ranglistaViewModel.UjJatekeredmenyHozzaadasa(new Jatekos("PoLáKoSz", 40000, 20));
+
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void JavitottBeillesztesesRendezes__PontSzerintVannakForditva()
+        public void RanglistaViewModel__JavitottBeillesztesesRendezes__PontSzerintVannakForditva()
         {
-            List<Jatekos> jatekosok = new List<Jatekos>()
+            List<Jatekos> expected = new List<Jatekos>()
+            {
+                new Jatekos("PoLáKoSz", 10000, 40),
+                new Jatekos("PoLáKoSz", 10000, 30),
+                new Jatekos("PoLáKoSz", 10000, 20),
+                new Jatekos("PoLáKoSz", 10000, 10),
+            };
+            List<Jatekos> actual = new List<Jatekos>()
             {
                 new Jatekos("PoLáKoSz", 10000, 10),
                 new Jatekos("PoLáKoSz", 10000, 20),
                 new Jatekos("PoLáKoSz", 10000, 30),
             };
+            ranglistaViewModel = new RanglistaViewModelMock(actual);
 
-            ranglistaViewModel.JavitottBeillesztesesRendezes(jatekosok);
+            ranglistaViewModel.UjJatekeredmenyHozzaadasa(new Jatekos("PoLáKoSz", 10000, 40));
 
-
+            CollectionAssert.AreEqual(expected, actual);
+        }
+            
+        [TestMethod]
+        public void RanglistaViewModel__JavitottBeillesztesesRendezes__KetEgyezoIdoKetKulonbozoPont()
+        {
             List<Jatekos> expected = new List<Jatekos>()
             {
-                new Jatekos("PoLáKoSz", 10000, 30),
-                new Jatekos("PoLáKoSz", 10000, 20),
+                new Jatekos("PoLáKoSz", 30000, 40),
+                new Jatekos("PoLáKoSz", 20000, 30),
+                new Jatekos("PoLáKoSz", 20000, 20),
                 new Jatekos("PoLáKoSz", 10000, 10),
             };
-
-            CollectionAssert.AreEqual(expected, jatekosok);
-        }
-
-        [TestMethod]
-        public void JavitottBeillesztesesRendezes__KetEgyezoIdoKetKulonbozoPont()
-        {
-            List<Jatekos> jatekosok = new List<Jatekos>()
+            List<Jatekos> actual = new List<Jatekos>()
             {
                 new Jatekos("PoLáKoSz", 10000, 10),
                 new Jatekos("PoLáKoSz", 20000, 20),
                 new Jatekos("PoLáKoSz", 20000, 30),
             };
+            ranglistaViewModel = new RanglistaViewModelMock(actual);
 
-            ranglistaViewModel.JavitottBeillesztesesRendezes(jatekosok);
+            ranglistaViewModel.UjJatekeredmenyHozzaadasa(new Jatekos("PoLáKoSz", 30000, 40));
 
-
-            List<Jatekos> expected = new List<Jatekos>()
-            {
-                new Jatekos("PoLáKoSz", 20000, 30),
-                new Jatekos("PoLáKoSz", 20000, 20),
-                new Jatekos("PoLáKoSz", 10000, 10),
-            };
-
-            CollectionAssert.AreEqual(expected, jatekosok);
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void JavitottBeillesztesesRendezes__KetEgyezoPontKetKulonbozoIdo()
+        public void RanglistaViewModel__JavitottBeillesztesesRendezes__KetEgyezoPontKetKulonbozoIdo()
         {
-            List<Jatekos> jatekosok = new List<Jatekos>()
-            {
-                new Jatekos("PoLáKoSz", 10000, 10),
-                new Jatekos("PoLáKoSz", 20000, 20),
-                new Jatekos("PoLáKoSz", 30000, 20),
-            };
-
-            ranglistaViewModel.JavitottBeillesztesesRendezes(jatekosok);
-
-
             List<Jatekos> expected = new List<Jatekos>()
             {
                 new Jatekos("PoLáKoSz", 30000, 20),
                 new Jatekos("PoLáKoSz", 20000, 20),
                 new Jatekos("PoLáKoSz", 10000, 10),
+                new Jatekos("PoLáKoSz", 1000, 40),
             };
+            List<Jatekos> actual = new List<Jatekos>()
+            {
+                new Jatekos("PoLáKoSz", 10000, 10),
+                new Jatekos("PoLáKoSz", 20000, 20),
+                new Jatekos("PoLáKoSz", 30000, 20),
+            };
+            ranglistaViewModel = new RanglistaViewModelMock(actual);
 
-            CollectionAssert.AreEqual(expected, jatekosok);
+            ranglistaViewModel.UjJatekeredmenyHozzaadasa(new Jatekos("PoLáKoSz", 1000, 40));
+
+            CollectionAssert.AreEqual(expected, actual);
         }
     }
 }
