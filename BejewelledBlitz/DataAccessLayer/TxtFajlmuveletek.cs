@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace PoLaKoSz.BejewelledBlitz
 {
@@ -11,11 +10,15 @@ namespace PoLaKoSz.BejewelledBlitz
 
         public TxtFajlmuveletek(string fileNev)
         {
-            FileNev = fileNev;
+            FileNev = fileNev + ".txt";
         }
 
 
 
+        /// <summary>
+        /// Megadott fájl sorainak beolvasása egy string[]-be. Amennyiben nem létezik a fájl, egy üres tömböt ad vissza
+        /// </summary>
+        /// <returns></returns>
         public string[] FajlSorainakBeolvasasa()
         {
             // Nem túl jó Exception kezelés :)

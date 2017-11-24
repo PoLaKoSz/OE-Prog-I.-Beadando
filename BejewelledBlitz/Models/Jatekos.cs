@@ -36,6 +36,13 @@ namespace PoLaKoSz.BejewelledBlitz
 
 
 
+        /// <summary>
+        /// Egy string Jatekos osztállyá alakítása
+        /// </summary>
+        /// <param name="txtSor"></param>
+        /// <exception cref="IndexOutOfRangeException"></exception>
+        /// <exception cref="FormatException"></exception>
+        /// <returns></returns>
         public static Jatekos Parse(string txtSor)
         {
             var stringDarabok = txtSor.Split(' ');
@@ -43,6 +50,10 @@ namespace PoLaKoSz.BejewelledBlitz
             return new Jatekos(stringDarabok[0], int.Parse(stringDarabok[1]), int.Parse(stringDarabok[2]));
         }
 
+        /// <summary>
+        /// Játékos object átalakítása string-gé (ranglista mentésénél fontos)
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return string.Format("{0} {1} {2}", Nev, Jatekido, Pontszam);
@@ -68,17 +79,6 @@ namespace PoLaKoSz.BejewelledBlitz
             }
 
             return true;
-        }
-
-        public override int GetHashCode()
-        {
-            var hashCode = -1204076784;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Nev);
-            hashCode = hashCode * -1521134295 + Jatekido.GetHashCode();
-            hashCode = hashCode * -1521134295 + SorokSzama.GetHashCode();
-            hashCode = hashCode * -1521134295 + OszlopokSzama.GetHashCode();
-            hashCode = hashCode * -1521134295 + Pontszam.GetHashCode();
-            return hashCode;
         }
     }
 }

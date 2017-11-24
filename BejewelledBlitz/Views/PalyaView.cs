@@ -50,6 +50,9 @@ namespace PoLaKoSz.BejewelledBlitz
             return valasz;
         }
 
+        /// <summary>
+        /// Jelenlegi pálya kiírása sorszámozással és oszlopszámozással a felhasználói felületre
+        /// </summary>
         public void RefreshUI()
         {
             int sorokSzama = Palya.GetLength(0);
@@ -57,11 +60,16 @@ namespace PoLaKoSz.BejewelledBlitz
 
             FejlecHozzadasa(sorokSzama, oszlopokSzama);
 
-            SorszamozottTartalom(Palya, sorokSzama, oszlopokSzama);
+            SorszamozottTartalom(sorokSzama, oszlopokSzama);
 
             //ConsoleTorlese();//Ezt ide lehetne rakni, de szerintem jobb, ha látszódik a korábbi pálya állása is
         }
 
+        /// <summary>
+        /// A pálya oszlopainak száma megjelenítése a színes pálya felett
+        /// </summary>
+        /// <param name="sorokSzama"></param>
+        /// <param name="oszlopokSzama"></param>
         void FejlecHozzadasa(int sorokSzama, int oszlopokSzama)
         {
             Console.Write("            ");
@@ -72,7 +80,12 @@ namespace PoLaKoSz.BejewelledBlitz
             }
         }
 
-        void SorszamozottTartalom(Golyo[,] matrix, int sorokSzama, int oszlopokSzama)
+        /// <summary>
+        /// Pálya tartalmának kiírása a képernyőre a sorszámozással együtt
+        /// </summary>
+        /// <param name="sorokSzama"></param>
+        /// <param name="oszlopokSzama"></param>
+        void SorszamozottTartalom(int sorokSzama, int oszlopokSzama)
         {
             Console.WriteLine("\n");
 
@@ -83,7 +96,7 @@ namespace PoLaKoSz.BejewelledBlitz
                 for (int j = 0; j < oszlopokSzama; j++)
                 {
                     // https://stackoverflow.com/a/2743263/7306734
-                    Console.ForegroundColor = matrix[i, j].Szine;
+                    Console.ForegroundColor = Palya[i, j].Szine;
 
                     Console.Write(" {0, 2}", 0);
 

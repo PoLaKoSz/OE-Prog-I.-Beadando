@@ -16,6 +16,9 @@ namespace PoLaKoSz.BejewelledBlitz
 
 
 
+        /// <summary>
+        /// Ranglista kiíratása a képernyőre
+        /// </summary>
         public void UiFrissitese()
         {
             Console.WriteLine("{0, 5}{1, 20}{2, 10}{3, 10}", "#", "Név", "Játékidő", "Pontszám");

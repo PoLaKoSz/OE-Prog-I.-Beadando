@@ -17,7 +17,7 @@ namespace PoLaKoSz.BejewelledBlitz
 
         public RanglistaViewModel()
         {
-            txtFajlmuveletek = new TxtFajlmuveletek("Dicsosegtabla.txt");
+            txtFajlmuveletek = new TxtFajlmuveletek("Dicsosegtabla");
 
             KorabbiRanglistaBetolteseFajlbol();
 
@@ -41,7 +41,7 @@ namespace PoLaKoSz.BejewelledBlitz
                 foreach (string sor in sorok)
                 {
                     ranglista.Add(Jatekos.Parse(sor));
-                }                
+                }
             }
         }
 

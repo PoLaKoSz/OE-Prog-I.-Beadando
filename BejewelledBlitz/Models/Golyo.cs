@@ -40,6 +40,11 @@ namespace PoLaKoSz.BejewelledBlitz
             return new Golyo(sorIndex, oszlopIndex, randomGolyoSzin);
         }
 
+        /// <summary>
+        /// UnitTest-hez
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (obj == null ||
@@ -58,20 +63,6 @@ namespace PoLaKoSz.BejewelledBlitz
             }
 
             return true;
-        }
-
-        public override string ToString()
-        {
-            return string.Format("({0};{1}) : {2}", SorIndex, OszlopIndex, Szine);
-        }
-
-        public override int GetHashCode()
-        {
-            var hashCode = 453514109;
-            hashCode = hashCode * -1521134295 + SorIndex.GetHashCode();
-            hashCode = hashCode * -1521134295 + OszlopIndex.GetHashCode();
-            hashCode = hashCode * -1521134295 + Szine.GetHashCode();
-            return hashCode;
         }
     }
 }

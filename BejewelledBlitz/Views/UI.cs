@@ -30,6 +30,10 @@ namespace PoLaKoSz.BejewelledBlitz
             return -1;
         }
 
+        /// <summary>
+        /// Console ablak nevének megváltoztatása
+        /// </summary>
+        /// <param name="nev"></param>
         public static void ConsoleAblakNev(string nev)
         {
             Console.Title = nev;

@@ -15,7 +15,7 @@ namespace PoLaKoSz.BejewelledBlitz
             Jatekos = jatekos;
 
             Palya = new Palya(Jatekos.SorokSzama, Jatekos.OszlopokSzama);
-            PalyaFeltolteseSzinesGolyokkal(Palya.Jatekter);
+            PalyaFeltolteseSzinesGolyokkal();
 
             PalyaView = new PalyaView(Palya.Jatekter);
         }
@@ -26,17 +26,20 @@ namespace PoLaKoSz.BejewelledBlitz
         /// A mátrix feltöltése színes golyókkal úgy, hogy egymás mellett ne legyen két egyforma színű golyó
         /// </summary>
         /// <param name="palya"></param>
-        void PalyaFeltolteseSzinesGolyokkal(Golyo[,] palya)
+        void PalyaFeltolteseSzinesGolyokkal()
         {
-            int sorokSzama = palya.GetLength(0);
-            int oszlopokSzama = palya.GetLength(1);
+            int    sorokSzama = Palya.Jatekter.GetLength(0);
+            int oszlopokSzama = Palya.Jatekter.GetLength(1);
 
             for (int y = 0; y < oszlopokSzama; y++)
             {
-                OszlopUresHelyeireRandomGolyok(palya, sorokSzama - 1, y);
+                OszlopUresHelyeireRandomGolyok(sorokSzama - 1, y);
             }
         }
 
+        /// <summary>
+        /// Jelenlegi pálya kirajzolása, majd 2 golyó koordinátáinak bekérése, illetve a csere elvégzése a következményeivel együtt
+        /// </summary>
         public void Leptetes()
         {
             PalyaView.RefreshUI();
@@ -45,6 +48,13 @@ namespace PoLaKoSz.BejewelledBlitz
             Lepes(golyok[0], golyok[1]);
         }
 
+        /// <summary>
+        /// Ha a megadott két golyó egymás mellett, vagy felett van, és az így kialakult cserével (1-es rész) egymás mellé vagy fölé kerül
+        /// minimum a Palya osztályban beállított egyszínű golyó, akkor eltünteti azokat, pontokat ad utánuk és a helyükre
+        /// a fölöttük lévő golyó, vagy random színű kerül, majd a módosult sortól újraindul az 1-es rész
+        /// </summary>
+        /// <param name="golyo1"></param>
+        /// <param name="golyo2"></param>
         protected void Lepes(Golyo golyo1, Golyo golyo2)
         {
             var egymasMellett = EgymasMellettE(golyo1, golyo2);
@@ -54,25 +64,26 @@ namespace PoLaKoSz.BejewelledBlitz
             {
                 int legalsoModositottSorindex = (golyo1.SorIndex > golyo2.SorIndex) ? golyo1.SorIndex: golyo2.SorIndex;
 
-                KetGolyoCserejePalyan(Palya.Jatekter, golyo1, golyo2);
+                KetGolyoCserejePalyan(golyo1, golyo2);
                 
                 do
                 {
                     legalsoModositottSorindex = AzonosSzinuGolyokEltuntetese(Palya, Jatekos, legalsoModositottSorindex);
 
-                    UresHelyekreGolyokLehozasa(Palya.Jatekter, legalsoModositottSorindex);
+                    UresHelyekreGolyokLehozasa(legalsoModositottSorindex);
 
                     legalsoModositottSorindex--;
                 } while (legalsoModositottSorindex >= 0);
-            }            
+            }
         }
 
-        void KetGolyoCserejePalyan(Golyo[,] palya, Golyo golyo1, Golyo golyo2)
+        void KetGolyoCserejePalyan(Golyo golyo1, Golyo golyo2)
         {
             ConsoleColor golyo1Szine = golyo1.Szine;
-            palya[golyo1.SorIndex, golyo1.OszlopIndex] = new Golyo(golyo1.SorIndex, golyo1.OszlopIndex, golyo2.Szine);
-            palya[golyo2.SorIndex, golyo2.OszlopIndex] = new Golyo(golyo2.SorIndex, golyo2.OszlopIndex, golyo1Szine);
+            Palya.Jatekter[golyo1.SorIndex, golyo1.OszlopIndex] = new Golyo(golyo1.SorIndex, golyo1.OszlopIndex, golyo2.Szine);
+            Palya.Jatekter[golyo2.SorIndex, golyo2.OszlopIndex] = new Golyo(golyo2.SorIndex, golyo2.OszlopIndex, golyo1Szine);
         }
+
 
         bool EgymasMellettE(Golyo golyo1, Golyo golyo2)
         {
@@ -111,7 +122,7 @@ namespace PoLaKoSz.BejewelledBlitz
                     {
                         jatekos.Pontszam += azonosSzinuGolyok;
 
-                        PontokatEroGolyokEltuntetese(palya, x, y, azonosSzinuGolyok);
+                        PontokatEroGolyokEltuntetese(x, y, azonosSzinuGolyok);
 
                         if (legalsoModositottSorIndex == 0)
                         {
@@ -135,7 +146,6 @@ namespace PoLaKoSz.BejewelledBlitz
         /// <returns></returns>
         int MegszamlalasTetel(Golyo[,] palya, int sorIndex, int oszlopIndex)
         {
-            int       oszlopokSzama = palya.GetLength(1);
             int egyszinuGolyokSzama = 1;
 
             for (int y = oszlopIndex - 1; y >= 0; y--)
@@ -156,15 +166,14 @@ namespace PoLaKoSz.BejewelledBlitz
         /// <summary>
         /// A megadott indexű sorban, a megadott oszlopindexet is beleértve balra haladva a megadott darabszámnyi null érték beírása a táblázatba
         /// </summary>
-        /// <param name="palya"></param>
         /// <param name="x"></param>
         /// <param name="oszlopIndex"></param>
         /// <param name="darabszam"></param>
-        void PontokatEroGolyokEltuntetese(Golyo[,] palya, int x, int oszlopIndex, int darabszam)
+        void PontokatEroGolyokEltuntetese(int x, int oszlopIndex, int darabszam)
         {
             for (int y = oszlopIndex; y > oszlopIndex - darabszam; y--)
             {
-                palya[x, y] = null;
+                Palya.Jatekter[x, y] = null;
             }
         }
 
@@ -172,28 +181,27 @@ namespace PoLaKoSz.BejewelledBlitz
         /// Üres helyek helyére a fölötte lévő golyó kerül, vagy ha már nincs fölötte golyó, akkor generál egy véletlen színűt úgy,
         /// hogy egymás mellett ne legyen két azonos színű
         /// </summary>
-        /// <param name="palya"></param>
         /// <param name="sorIndex"></param>
-        void UresHelyekreGolyokLehozasa(Golyo[,] palya, int sorIndex)
+        void UresHelyekreGolyokLehozasa(int sorIndex)
         {
-            int oszlopokSzama = palya.GetLength(1);
+            int oszlopokSzama = Palya.Jatekter.GetLength(1);
 
             for (int y = 0; y < oszlopokSzama; y++)
             {
-                FuggolegesSzetvalogatasHelybenCserevel(palya, sorIndex, y);
+                FuggolegesSzetvalogatasHelybenCserevel(sorIndex, y);
 
-                OszlopUresHelyeireRandomGolyok(palya, sorIndex, y);
+                OszlopUresHelyeireRandomGolyok(sorIndex, y);
             }
         }
 
         /// <summary>
         /// A megadott sorindextől felfele (a sorindexet is beleértve) minden üres helyet a tetejére visz, és a színes golyókat pedig az aljához "szorítja"
         /// </summary>
-        /// <param name="palya"></param>
         /// <param name="sorIndextolFelfele"></param>
         /// <param name="y"></param>
-        void FuggolegesSzetvalogatasHelybenCserevel(Golyo[,] palya, int sorIndextolFelfele, int y)
+        void FuggolegesSzetvalogatasHelybenCserevel(int sorIndextolFelfele, int y)
         {
+            Golyo[,] palya = Palya.Jatekter;
             int belsoSorindex = int.MaxValue;
 
             for (int x = sorIndextolFelfele; x >= 0; x--)
@@ -222,11 +230,11 @@ namespace PoLaKoSz.BejewelledBlitz
         /// <summary>
         /// A megadott oszlopban a megadott sortól felfele (a sor indexét is beleértve) minden üres helyre egy olyan színű golyót rak be, ami se az üres hely jobb, sem a bal oldalán nincs
         /// </summary>
-        /// <param name="palya"></param>
         /// <param name="sorIndex"></param>
         /// <param name="y"></param>
-        void OszlopUresHelyeireRandomGolyok(Golyo[,] palya, int sorIndex, int y)
+        void OszlopUresHelyeireRandomGolyok(int sorIndex, int y)
         {
+            var         palya = Palya.Jatekter;
             int oszlopokSzama = palya.GetLength(1);
 
             for (int x = 0; x <= sorIndex; x++)
