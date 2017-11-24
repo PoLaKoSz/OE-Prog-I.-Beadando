@@ -2,7 +2,7 @@
 
 namespace PoLaKoSz.BejewelledBlitz
 {
-    public class PalyaView : UI
+    public class PalyaView// : UI
     {
         Golyo[,] Palya;
 
@@ -24,6 +24,27 @@ namespace PoLaKoSz.BejewelledBlitz
             {
                 golyo1, golyo2
             };
+        }
+
+        protected string InputBeker(string kiseroSzoveg)
+        {
+            Console.Write(kiseroSzoveg);
+
+            return Console.ReadLine();
+        }
+
+        protected int IntInputBeker(string kiseroSzoveg)
+        {
+            try
+            {
+                return int.Parse(InputBeker(kiseroSzoveg));
+            }
+            catch (FormatException)
+            {
+                IntInputBeker(kiseroSzoveg);
+            }
+
+            return -1;
         }
 
         int SorszamBeker(int golyoSorszama)
