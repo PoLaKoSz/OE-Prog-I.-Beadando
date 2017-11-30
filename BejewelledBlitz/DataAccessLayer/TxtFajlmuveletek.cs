@@ -21,7 +21,7 @@ namespace PoLaKoSz.BejewelledBlitz
         /// <returns></returns>
         public string[] FajlSorainakBeolvasasa()
         {
-            // Nem túl jó Exception kezelés :)
+            // Nem biztos, hogy ez a legszerencsésebb Exception kezelés, de remélem elfogadható
             if (!File.Exists(FileNev))
             {
                 return new string[0];
