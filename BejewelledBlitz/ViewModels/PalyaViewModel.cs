@@ -68,7 +68,7 @@ namespace PoLaKoSz.BejewelledBlitz
                 
                 do
                 {
-                    legalsoModositottSorindex = AzonosSzinuGolyokEltuntetese(Palya, Jatekos, legalsoModositottSorindex);
+                    legalsoModositottSorindex = AzonosSzinuGolyokEltuntetese(Palya, Jatekos);
 
                     UresHelyekreGolyokLehozasa(legalsoModositottSorindex);
 
@@ -105,14 +105,15 @@ namespace PoLaKoSz.BejewelledBlitz
         /// <param name="jatekos"></param>
         /// <param name="sorIndex"></param>
         /// <returns></returns>
-        int AzonosSzinuGolyokEltuntetese(Palya palyaBeallitasok, Jatekos jatekos, int sorIndex)
+        int AzonosSzinuGolyokEltuntetese(Palya palyaBeallitasok, Jatekos jatekos)
         {
             Golyo[,] palya = palyaBeallitasok.Jatekter;
 
-            int             oszlopokSzama = palya.GetLength(1),
-                legalsoModositottSorIndex = 0;
+            int            sorokSzama = palya.GetLength(0),
+                        oszlopokSzama = palya.GetLength(1),
+            legalsoModositottSorIndex = 0;
 
-            for (int x = sorIndex; x >= 0; x--)
+            for (int x = sorokSzama - 1; x >= 0; x--)
             {
                 for (int y = oszlopokSzama - 1; y >= 0; y--)
                 {
